@@ -9,15 +9,15 @@
  */
 int get_max(int *array, int size)
 {
-	int max, i;
+	int fnmax, m;
 
-	for (max = array[0], i = 1; i < size; i++)
+	for (fnmax = array[0], m = 1; m < size; m++)
 	{
-		if (array[i] > max)
-			max = array[i];
+		if (array[m] > fnmax)
+			fnmax = array[m];
 	}
 
-	return (max);
+	return (fnmax);
 }
 
 /**
@@ -30,39 +30,39 @@ int get_max(int *array, int size)
  */
 void counting_sort(int *array, size_t size)
 {
-	int *count, *sorted, max, i;
+	int *fncount, *fnsorted, fnmax, m;
 
 	if (array == NULL || size < 2)
 		return;
 
-	sorted = malloc(sizeof(int) * size);
-	if (sorted == NULL)
+	fnsorted = malloc(sizeof(int) * size);
+	if (fnsorted == NULL)
 		return;
-	max = get_max(array, size);
-	count = malloc(sizeof(int) * (max + 1));
-	if (count == NULL)
+	fnmax = get_max(array, size);
+	fncount = malloc(sizeof(int) * (fnmax + 1));
+	if (fncount == NULL)
 	{
-		free(sorted);
+		free(fnsorted);
 		return;
 	}
 
-	for (i = 0; i < (max + 1); i++)
-		count[i] = 0;
-	for (i = 0; i < (int)size; i++)
-		count[array[i]] += 1;
-	for (i = 0; i < (max + 1); i++)
-		count[i] += count[i - 1];
-	print_array(count, max + 1);
+	for (m = 0; m < (fnmax + 1); m++)
+		fncount[m] = 0;
+	for (m = 0; m < (int)size; m++)
+		fncount[array[m]] += 1;
+	for (m = 0; m < (fnmax + 1); m++)
+		fncount[m] += fncount[m - 1];
+	print_array(fncount, fnmax + 1);
 
-	for (i = 0; i < (int)size; i++)
+	for (m = 0; m < (int)size; m++)
 	{
-		sorted[count[array[i]] - 1] = array[i];
-		count[array[i]] -= 1;
+		fnsorted[fncount[array[m]] - 1] = array[m];
+		fncount[array[m]] -= 1;
 	}
 
-	for (i = 0; i < (int)size; i++)
-		array[i] = sorted[i];
+	for (m = 0; m < (int)size; m++)
+		array[m] = fnsorted[m];
 
-	free(sorted);
-	free(count);
+	free(fnsorted);
+	free(fncount);
 }

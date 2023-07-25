@@ -13,11 +13,11 @@ void bitonic_sort(int *array, size_t size);
  */
 void swap_ints(int *a, int *b)
 {
-	int tmp;
+	int fntmp;
 
-	tmp = *a;
+	fntmp = *a;
 	*a = *b;
-	*b = tmp;
+	*b = fntmp;
 }
 
 /**
@@ -31,18 +31,18 @@ void swap_ints(int *a, int *b)
 void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
 		char flow)
 {
-	size_t i, jump = seq / 2;
+	size_t m, fnjump = seq / 2;
 
 	if (seq > 1)
 	{
-		for (i = start; i < start + jump; i++)
+		for (m = start; m < start + fnjump; m++)
 		{
-			if ((flow == UP && array[i] > array[i + jump]) ||
-			    (flow == DOWN && array[i] < array[i + jump]))
-				swap_ints(array + i, array + i + jump);
+			if ((flow == UP && array[m] > array[m + fnjump]) ||
+			    (flow == DOWN && array[m] < array[m + fnjump]))
+				swap_ints(array + m, array + m + fnjump);
 		}
-		bitonic_merge(array, size, start, jump, flow);
-		bitonic_merge(array, size, start + jump, jump, flow);
+		bitonic_merge(array, size, start, fnjump, flow);
+		bitonic_merge(array, size, start + fnjump, fnjump, flow);
 	}
 }
 
@@ -56,7 +56,7 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
  */
 void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
 {
-	size_t cut = seq / 2;
+	size_t fncut = seq / 2;
 	char *str = (flow == UP) ? "UP" : "DOWN";
 
 	if (seq > 1)
@@ -64,8 +64,8 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
 		printf("Merging [%lu/%lu] (%s):\n", seq, size, str);
 		print_array(array + start, seq);
 
-		bitonic_seq(array, size, start, cut, UP);
-		bitonic_seq(array, size, start + cut, cut, DOWN);
+		bitonic_seq(array, size, start, fncut, UP);
+		bitonic_seq(array, size, start + fncut, fncut, DOWN);
 		bitonic_merge(array, size, start, seq, flow);
 
 		printf("Result [%lu/%lu] (%s):\n", seq, size, str);

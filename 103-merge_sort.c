@@ -16,7 +16,7 @@ void merge_sort(int *array, size_t size);
 void merge_subarr(int *subarr, int *buff, size_t front, size_t mid,
 		size_t back)
 {
-	size_t i, j, k = 0;
+	size_t m, n, p = 0;
 
 	printf("Merging...\n[left]: ");
 	print_array(subarr + front, mid - front);
@@ -24,14 +24,14 @@ void merge_subarr(int *subarr, int *buff, size_t front, size_t mid,
 	printf("[right]: ");
 	print_array(subarr + mid, back - mid);
 
-	for (i = front, j = mid; i < mid && j < back; k++)
-		buff[k] = (subarr[i] < subarr[j]) ? subarr[i++] : subarr[j++];
-	for (; i < mid; i++)
-		buff[k++] = subarr[i];
-	for (; j < back; j++)
-		buff[k++] = subarr[j];
-	for (i = front, k = 0; i < back; i++)
-		subarr[i] = buff[k++];
+	for (m = front, n = mid; m < mid && n < back; p++)
+		buff[p] = (subarr[m] < subarr[n]) ? subarr[m++] : subarr[n++];
+	for (; m < mid; m++)
+		buff[p++] = subarr[m];
+	for (; n < back; n++)
+		buff[p++] = subarr[n];
+	for (m = front, p = 0; m < back; m++)
+		subarr[m] = buff[p++];
 
 	printf("[Done]: ");
 	print_array(subarr + front, back - front);

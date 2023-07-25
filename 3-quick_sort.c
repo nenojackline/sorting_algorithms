@@ -12,16 +12,16 @@ void quick_sort(int *array, size_t size);
  */
 void swap_ints(int *a, int *b)
 {
-	int tmp;
+	int fntmp;
 
-	tmp = *a;
+	fntmp = *a;
 	*a = *b;
-	*b = tmp;
+	*b = fntmp;
 }
 
 /**
  * lomuto_partition - Order a subset of an array of integers according to
- *                    the lomuto partition scheme (last element as pivot).
+ *                    the lomuto partition scheme (last element as fnpivot).
  * @array: The array of integers.
  * @size: The size of the array.
  * @left: The starting index of the subset to order.
@@ -31,29 +31,29 @@ void swap_ints(int *a, int *b)
  */
 int lomuto_partition(int *array, size_t size, int left, int right)
 {
-	int *pivot, above, below;
+	int *fnpivot, fnabove, fnbelow;
 
-	pivot = array + right;
-	for (above = below = left; below < right; below++)
+	fnpivot = array + right;
+	for (fnabove = fnbelow = left; fnbelow < right; fnbelow++)
 	{
-		if (array[below] < *pivot)
+		if (array[fnbelow] < *fnpivot)
 		{
-			if (above < below)
+			if (fnabove < fnbelow)
 			{
-				swap_ints(array + below, array + above);
+				swap_ints(array + fnbelow, array + fnabove);
 				print_array(array, size);
 			}
-			above++;
+			fnabove++;
 		}
 	}
 
-	if (array[above] > *pivot)
+	if (array[fnabove] > *fnpivot)
 	{
-		swap_ints(array + above, pivot);
+		swap_ints(array + fnabove, fnpivot);
 		print_array(array, size);
 	}
 
-	return (above);
+	return (fnabove);
 }
 
 /**
@@ -67,13 +67,13 @@ int lomuto_partition(int *array, size_t size, int left, int right)
  */
 void lomuto_sort(int *array, size_t size, int left, int right)
 {
-	int part;
+	int fnpart;
 
 	if (right - left > 0)
 	{
-		part = lomuto_partition(array, size, left, right);
-		lomuto_sort(array, size, left, part - 1);
-		lomuto_sort(array, size, part + 1, right);
+		fnpart = lomuto_partition(array, size, left, right);
+		lomuto_sort(array, size, left, fnpart - 1);
+		lomuto_sort(array, size, fnpart + 1, right);
 	}
 }
 

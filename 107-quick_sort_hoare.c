@@ -12,11 +12,11 @@ void quick_sort_hoare(int *array, size_t size);
  */
 void swap_ints(int *a, int *b)
 {
-	int tmp;
+	int fntmp;
 
-	tmp = *a;
+	fntmp = *a;
 	*a = *b;
-	*b = tmp;
+	*b = fntmp;
 }
 
 /**
@@ -29,31 +29,31 @@ void swap_ints(int *a, int *b)
  *
  * Return: The final partition index.
  *
- * Description: Uses the last element of the partition as the pivot.
+ * Description: Uses the last element of the partition as the fnpivot.
  * Prints the array after each swap of two elements.
  */
 int hoare_partition(int *array, size_t size, int left, int right)
 {
-	int pivot, above, below;
+	int fnpivot, fnabove, fnbelow;
 
-	pivot = array[right];
-	for (above = left - 1, below = right + 1; above < below;)
+	fnpivot = array[right];
+	for (fnabove = left - 1, fnbelow = right + 1; fnabove < fnbelow;)
 	{
 		do {
-			above++;
-		} while (array[above] < pivot);
+			fnabove++;
+		} while (array[fnabove] < fnpivot);
 		do {
-			below--;
-		} while (array[below] > pivot);
+			fnbelow--;
+		} while (array[fnbelow] > fnpivot);
 
-		if (above < below)
+		if (fnabove < fnbelow)
 		{
-			swap_ints(array + above, array + below);
+			swap_ints(array + fnabove, array + fnbelow);
 			print_array(array, size);
 		}
 	}
 
-	return (above);
+	return (fnabove);
 }
 
 /**
@@ -67,13 +67,13 @@ int hoare_partition(int *array, size_t size, int left, int right)
  */
 void hoare_sort(int *array, size_t size, int left, int right)
 {
-	int part;
+	int fnpart;
 
 	if (right - left > 0)
 	{
-		part = hoare_partition(array, size, left, right);
-		hoare_sort(array, size, left, part - 1);
-		hoare_sort(array, size, part, right);
+		fnpart = hoare_partition(array, size, left, right);
+		hoare_sort(array, size, left, fnpart - 1);
+		hoare_sort(array, size, fnpart, right);
 	}
 }
 

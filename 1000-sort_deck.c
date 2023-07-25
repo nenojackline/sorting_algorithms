@@ -71,25 +71,25 @@ char get_value(deck_node_t *card)
  */
 void insertion_sort_deck_kind(deck_node_t **deck)
 {
-	deck_node_t *iter, *insert, *tmp;
+	deck_node_t *fniter, *fninsert, *fntmp;
 
-	for (iter = (*deck)->next; iter != NULL; iter = tmp)
+	for (fniter = (*deck)->next; fniter != NULL; fniter = fntmp)
 	{
-		tmp = iter->next;
-		insert = iter->prev;
-		while (insert != NULL && insert->card->kind > iter->card->kind)
+		fntmp = fniter->next;
+		fninsert = fniter->prev;
+		while (fninsert != NULL && fninsert->card->kind > fniter->card->kind)
 		{
-			insert->next = iter->next;
-			if (iter->next != NULL)
-				iter->next->prev = insert;
-			iter->prev = insert->prev;
-			iter->next = insert;
-			if (insert->prev != NULL)
-				insert->prev->next = iter;
+			fninsert->next = fniter->next;
+			if (fniter->next != NULL)
+				fniter->next->prev = fninsert;
+			fniter->prev = fninsert->prev;
+			fniter->next = fninsert;
+			if (fninsert->prev != NULL)
+				fninsert->prev->next = fniter;
 			else
-				*deck = iter;
-			insert->prev = iter;
-			insert = iter->prev;
+				*deck = fniter;
+			fninsert->prev = fniter;
+			fninsert = fniter->prev;
 		}
 	}
 }
@@ -101,27 +101,27 @@ void insertion_sort_deck_kind(deck_node_t **deck)
  */
 void insertion_sort_deck_value(deck_node_t **deck)
 {
-	deck_node_t *iter, *insert, *tmp;
+	deck_node_t *fniter, *fninsert, *fntmp;
 
-	for (iter = (*deck)->next; iter != NULL; iter = tmp)
+	for (fniter = (*deck)->next; fniter != NULL; fniter = fntmp)
 	{
-		tmp = iter->next;
-		insert = iter->prev;
-		while (insert != NULL &&
-		       insert->card->kind == iter->card->kind &&
-		       get_value(insert) > get_value(iter))
+		fntmp = fniter->next;
+		fninsert = fniter->prev;
+		while (fninsert != NULL &&
+		       fninsert->card->kind == fniter->card->kind &&
+		       get_value(fninsert) > get_value(fniter))
 		{
-			insert->next = iter->next;
-			if (iter->next != NULL)
-				iter->next->prev = insert;
-			iter->prev = insert->prev;
-			iter->next = insert;
-			if (insert->prev != NULL)
-				insert->prev->next = iter;
+			fninsert->next = fniter->next;
+			if (fniter->next != NULL)
+				fniter->next->prev = fninsert;
+			fniter->prev = fninsert->prev;
+			fniter->next = fninsert;
+			if (fninsert->prev != NULL)
+				fninsert->prev->next = fniter;
 			else
-				*deck = iter;
-			insert->prev = iter;
-			insert = iter->prev;
+				*deck = fniter;
+			fninsert->prev = fniter;
+			fninsert = fniter->prev;
 		}
 	}
 }

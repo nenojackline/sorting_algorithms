@@ -7,11 +7,11 @@
  */
 void swap_ints(int *a, int *b)
 {
-	int tmp;
+	int fntmp;
 
-	tmp = *a;
+	fntmp = *a;
 	*a = *b;
-	*b = tmp;
+	*b = fntmp;
 }
 
 /**
@@ -24,21 +24,21 @@ void swap_ints(int *a, int *b)
  */
 void selection_sort(int *array, size_t size)
 {
-	int *min;
-	size_t i, j;
+	int *fnmin;
+	size_t m, n;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = 0; i < size - 1; i++)
+	for (m = 0; m < size - 1; m++)
 	{
-		min = array + i;
-		for (j = i + 1; j < size; j++)
-			min = (array[j] < *min) ? (array + j) : min;
+		fnmin = array + m;
+		for (n = m + 1; n < size; n++)
+			fnmin = (array[n] < *fnmin) ? (array + n) : fnmin;
 
-		if ((array + i) != min)
+		if ((array + m) != fnmin)
 		{
-			swap_ints(array + i, min);
+			swap_ints(array + m, fnmin);
 			print_array(array, size);
 		}
 	}
